@@ -6,12 +6,12 @@ const openai = new OpenAI({
   ...(process.env.OPENAI_BASE_URL && { baseURL: process.env.OPENAI_BASE_URL }),
 });
 
-export const runtime = "edge";
+//export const runtime = "edge";
 
 export async function POST(req: NextRequest) {
   const { messages } = await req.json();
   const response = await openai.chat.completions.create({
-    model: "gpt-4o",
+    model: process.env.CHAT_MODEL,
     stream: false,
     messages,
   });

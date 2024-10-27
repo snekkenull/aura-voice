@@ -34,7 +34,7 @@ async function convertAudioToText(audioData: Buffer) {
   try {
     const response = await openai.audio.transcriptions.create({
       file: fs.createReadStream(outputPath),
-      model: "whisper-1",
+      model: process.env.AUDIO_MODEL,
     });
 
     return response.text;
