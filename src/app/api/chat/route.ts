@@ -7,11 +7,12 @@ const openai = new OpenAI({
 });
 
 //export const runtime = "edge";
+const model = process.env.CHAT_MODEL as string;
 
 export async function POST(req: NextRequest) {
   const { messages } = await req.json();
   const response = await openai.chat.completions.create({
-    model: process.env.CHAT_MODEL,
+    model: model,
     stream: false,
     messages,
   });

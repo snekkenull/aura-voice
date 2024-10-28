@@ -9,6 +9,8 @@ const openai = new OpenAI({
 
 });
 
+const model = process.env.AUDIO_MODEL as string;
+
 interface RequestBody {
   audio: string;
 }
@@ -34,7 +36,7 @@ async function convertAudioToText(audioData: Buffer) {
   try {
     const response = await openai.audio.transcriptions.create({
       file: fs.createReadStream(outputPath),
-      model: process.env.AUDIO_MODEL,
+      model: model,
     });
 
     return response.text;
